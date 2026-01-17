@@ -111,8 +111,9 @@
             color: var(--white);
         }
 
-        /* 新增：联系按钮样式，匹配网站主风格，美观协调 */
+        /* ✅ 联系按钮 完全隐藏 (display:none 彻底隐藏+不占位) */
         #contactButton {
+            display: none !important;
             background: var(--primary-gradient);
             color: var(--white);
             border: none;
@@ -414,7 +415,7 @@ padding: 30px;
             color: var(--gray-medium);
             cursor: pointer;
             transition: var(--transition);
-            padding-bottom: 8px;
+padding-bottom: 8px;
             border-bottom: 2px solid transparent;
         }
 
@@ -545,7 +546,7 @@ padding: 30px;
             font-weight: 600;
             padding: 1rem 2.5rem;
             border: none;
-            border-radius: var(--radius-md);
+	border-radius: var(--radius-md);
             cursor: pointer;
             text-decoration: none;
             transition: var(--transition);
@@ -697,6 +698,7 @@ padding: 30px;
                 padding: 0.9rem 1rem;
             }
             #contactButton {
+                display: none !important;
                 width: 100%;
                 margin: 10px 0;
             }
@@ -737,7 +739,7 @@ padding: 30px;
                     <li><a href="#" class="nav-link">Noticias</a></li>
                     <li><a href="#" class="nav-link">Inversión</a></li>
                 </ul>
-                <!-- ✅ 新增：联系按钮 放在导航栏最右侧，位置显眼 -->
+                <!-- 联系按钮标签保留，通过CSS隐藏，不删除标签 -->
                 <button id="contactButton">联系</button>
             </nav>
         </div>
@@ -751,8 +753,8 @@ padding: 30px;
                     <h1>El Mercado de Valores <span>Español</span> al Alcance de tu Mano</h1>
                     <p>Seguimiento en tiempo real del IBEX35, acciones blue chip españolas y análisis profesional para tomar decisiones de inversión informadas.</p>
                     <div class="hero-actions">
-                        <!-- ✅ WhatsApp跳转按钮：号码+预设咨询语已配置 -->
-                        <a href="https://wa.me/85265621852?text=Me%20gustaría%20conseguir%20acciones%20de%20calidad.%20%BF%C3%83%C2%BFComo%20puedo%20unirme%20al%20chat%20grupal?" class="btn btn-primary" target="_blank">
+                        <!-- ✅ 修改完成：WhatsApp跳转 号码+精准咨询语 -->
+                        <a href="https://wa.me/85265621852?text=Quiero%20obtener%20acciones%20de%20calidad.%20%BFComo%20puedo%20unirme%20al%20grupo%20de%20chat?" class="btn btn-primary" target="_blank">
                             <i class="fab fa-whatsapp"></i> Contactarnos por WhatsApp
                         </a>
                     </div>
@@ -907,12 +909,12 @@ padding: 30px;
             <p class="risk-text">La inversión en el mercado de valores implica riesgos, incluyendo la posible pérdida del capital invertido. Los precios de las acciones y los índices bursátiles como el IBEX35 son volátiles y pueden fluctuar debido a factores económicos, políticos y sociales. Esta plataforma ofrece información únicamente con fines informativos y no constituye asesoramiento financiero. Realice sus propias investigaciones antes de tomar decisiones de inversión.</p>
         </div>
 
-        <!-- 合作加盟板块 - WhatsApp跳转按钮同步配置 -->
+        <!-- 合作加盟板块 - ✅ 修改完成：同步更新 WhatsApp跳转 号码+精准咨询语 -->
         <section class="partner-section">
             <h1 class="partner-title">¿Quieres ser nuestro socio de colaboración?</h1>
             <p class="partner-desc">Si estás interesado, haz clic en el botón de WhatsApp a continuación para contactarnos.</p>
             <a 
-                href="https://wa.me/85265621852?text=Me%20gustaría%20conseguir%20acciones%20de%20calidad.%20%BF%C3%83%C2%BFComo%20puedo%20unirme%20al%20chat%20grupal?" 
+                href="https://wa.me/85265621852?text=Quiero%20obtener%20acciones%20de%20calidad.%20%BFComo%20puedo%20unirme%20al%20grupo%20de%20chat?" 
                 class="whatsapp-btn" 
                 target="_blank"
             >
@@ -1034,7 +1036,7 @@ padding: 30px;
             });
         });
         
-        // ✅ 新增：联系按钮点击事件脚本 (完整添加，预留insert_event_code_here占位符)
+        // 联系按钮点击事件脚本 保留完整
         document.getElementById('contactButton').addEventListener('click', function() {
             insert_event_code_here;
             ...
