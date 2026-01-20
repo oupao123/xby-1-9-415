@@ -753,8 +753,8 @@ padding-bottom: 8px;
                     <h1>El Mercado de Valores <span>Español</span> al Alcance de tu Mano</h1>
                     <p>Seguimiento en tiempo real del IBEX35, acciones blue chip españolas y análisis profesional para tomar decisiones de inversión informadas.</p>
                     <div class="hero-actions">
-                        <!-- ✅ 修改完成：WhatsApp跳转 号码+精准咨询语 原版无特殊问号 -->
-                        <a href="https://wa.me/85265621852?text=Quiero%20obtener%20acciones%20de%20calidad.%20Cómo%20puedo%20unirme%20al%20grupo%20de%20chat?" class="btn btn-primary" id="heroWhatsappBtn" target="_blank">
+                        <!-- ✅ 新增ID：hero-whatsapp-btn 用于事件追踪 -->
+                        <a id="hero-whatsapp-btn" href="https://wa.me/85265621852?text=Quiero%20obtener%20acciones%20de%20calidad.%20Cómo%20puedo%20unirme%20al%20grupo%20de%20chat?" class="btn btn-primary" target="_blank">
                             <i class="fab fa-whatsapp"></i> Contactarnos por WhatsApp
                         </a>
                     </div>
@@ -909,14 +909,15 @@ padding-bottom: 8px;
             <p class="risk-text">La inversión en el mercado de valores implica riesgos, incluyendo la posible pérdida del capital invertido. Los precios de las acciones y los índices bursátiles como el IBEX35 son volátiles y pueden fluctuar debido a factores económicos, políticos y sociales. Esta plataforma ofrece información únicamente con fines informativos y no constituye asesoramiento financiero. Realice sus propias investigaciones antes de tomar decisiones de inversión.</p>
         </div>
 
-        <!-- 合作加盟板块 - ✅ 修改完成：同步更新 WhatsApp跳转 号码+精准咨询语 原版无特殊问号 -->
+        <!-- 合作加盟板块 -->
         <section class="partner-section">
             <h1 class="partner-title">¿Quieres ser nuestro socio de colaboración?</h1>
             <p class="partner-desc">Si estás interesado, haz clic en el botón de WhatsApp a continuación para contactarnos.</p>
+            <!-- ✅ 新增ID：partner-whatsapp-btn 用于事件追踪 -->
             <a 
+                id="partner-whatsapp-btn"
                 href="https://wa.me/85265621852?text=Quiero%20obtener%20acciones%20de%20calidad.%20Cómo%20puedo%20unirme%20al%20grupo%20de%20chat?" 
                 class="whatsapp-btn" 
-                id="partnerWhatsappBtn"
                 target="_blank"
             >
                 <i class="fab fa-whatsapp whatsapp-icon"></i>
@@ -1037,30 +1038,38 @@ padding-bottom: 8px;
             });
         });
         
-        // 6. 为Contact按钮添加点击事件（保留）
+        // 联系按钮点击事件脚本 保留完整
         document.getElementById('contactButton').addEventListener('click', function() {
             insert_event_code_here;
             ...
         }, false);
 
-        // 7. 添加Facebook Contact事件追踪 - 核心新增代码
-        // 为所有WhatsApp联系按钮添加点击事件，触发Contact追踪
-        const heroWhatsappBtn = document.getElementById('heroWhatsappBtn');
-        const partnerWhatsappBtn = document.getElementById('partnerWhatsappBtn');
-        
-        // 定义触发Contact事件的函数
-        function trackContactEvent() {
+        // ✅ 新增：WhatsApp按钮点击事件追踪（包含Contact标准事件）
+        // 追踪英雄区WhatsApp按钮
+        document.getElementById('hero-whatsapp-btn').addEventListener('click', function() {
+            // 触发Facebook标准Contact事件
             fbq('track', 'Contact');
-            console.log('Facebook Contact事件已触发'); // 可选：调试用
-        }
-        
-        // 绑定点击事件
-        if (heroWhatsappBtn) {
-            heroWhatsappBtn.addEventListener('click', trackContactEvent);
-        }
-        if (partnerWhatsappBtn) {
-            partnerWhatsappBtn.addEventListener('click', trackContactEvent);
-        }
+            // 同时保留自定义事件，便于精细化分析
+            fbq('trackCustom', 'Stock_Lead', {
+                button_type: 'hero_whatsapp',
+                intent: 'investment_consult',
+                currency: 'EUR',
+                value: 0 // 可根据实际业务调整为客单价
+            });
+        });
+
+        // 追踪合作加盟板块WhatsApp按钮
+        document.getElementById('partner-whatsapp-btn').addEventListener('click', function() {
+            // 触发Facebook标准Contact事件
+            fbq('track', 'Contact');
+            // 同时保留自定义事件，便于精细化分析
+            fbq('trackCustom', 'Stock_Lead', {
+                button_type: 'partner_whatsapp',
+                intent: 'cooperation_apply',
+                currency: 'EUR',
+                value: 0 // 可根据实际业务调整为客单价
+            });
+        });
     </script>
 </body>
 </html>
